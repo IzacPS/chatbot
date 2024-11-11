@@ -1,0 +1,20 @@
+# Ignora o ambiente virtual
+venv/
+chat-env/
+.env/
+
+# Ignora arquivos de cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignora o controle de versão
+.git
+.gitignore
+.dockerignore
+
+# Ignora outras pastas desnecessárias
+*.md
+
+images/
+docker/
