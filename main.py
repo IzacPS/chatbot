@@ -66,7 +66,7 @@ def main():
     # config = {"configurable": {"thread_id": chat_uuid}}
     #
     # print("------------------------user------------------------")
-    # _input = "Donald Trump foi eleitro presidente dos Estados Unidos em 2024."
+    # _input = "Donald Trump foi eleito presidente dos Estados Unidos em 2024."
     # # _input = "responda como um pirata."
     # response = app.invoke({"messages": [HumanMessage(content=_input)]}, config)# pyright: ignore
     # print("------------------------messages------------------------")
