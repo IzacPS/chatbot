@@ -36,14 +36,6 @@ def main():
             pass
         time.sleep(4)
 
-
-    # print("------------------------messages------------------------")
-    # for m in response["messages"]:
-    #     print(m)
-    # print("------------------------assistant------------------------")
-    # print(response["messages"][-1].content,"\n\n")
-
-
 if __name__ == "__main__":
     main()
 

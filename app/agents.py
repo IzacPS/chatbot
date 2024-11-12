@@ -1,22 +1,32 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
+import os
 
-from .model import ImperativePhraseClassification
+from .model import PhraseClassification
 
 # sot_system_prompt,
 from .tools import source_of_truth_tools_list
 from .prompts import (
     chat_type_system_prompt,
-    #this is for using tools
-    # sot_system_prompt,
-    sot_system_prompt2,
     assistant_prompt,
 )
+chat_type_llm = None 
+sot_llm = None
+llm_assistant = None
 
-chat_type_llm = ChatGroq(model="llama3-70b-8192", temperature=0.0) # pyright: ignore
-sot_llm = ChatGroq(model="llama3-70b-8192", temperature=0.0) # pyright: ignore
-llm_assistant = ChatGroq(model="llama3-8b-8192") # pyright: ignore
+if os.environ.get("OPENAI_API_KEY"):
+    chat_type_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2) # pyright: ignore
+    sot_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2) # pyright: ignore
+    llm_assistant = ChatOpenAI() # pyright: ignore
+elif os.environ.get("GROQ_API_KEY"):
+    chat_type_llm = ChatGroq(model="llama3-70b-8192", temperature=0.2) # pyright: ignore
+    sot_llm = ChatGroq(model="llama3-70b-8192", temperature=0.0) # pyright: ignore
+    llm_assistant = ChatGroq(model="llama3-8b-8192") # pyright: ignore
+else: 
+    raise Exception("Nenhuma chave de api encontrada. Use GROQ_API_KEY ou OPENAI_API_KEY para configurar sua chave.")
+
 
 def create_agent(
         llm, 
@@ -45,22 +55,14 @@ chat_type_system_prompt_template = ChatPromptTemplate.from_messages(
 
 chat_type_agent = create_agent(llm=chat_type_llm, 
                                prompt_template=chat_type_system_prompt_template,
-                               structure_type=ImperativePhraseClassification,
+                               structure_type=PhraseClassification,
                                )
 
-################ source of truth agent 
-sot_system_prompt_template = ChatPromptTemplate.from_messages(
-    [
-        #this is for using tools
-        # ("system", sot_system_prompt),
-        ("system", sot_system_prompt2),
-        ("human", "{message}"),
-    ]
-)  
 source_of_truth_agent = create_agent(llm=sot_llm,
-                                     prompt_template=sot_system_prompt_template, 
+                                     # prompt_template=sot_system_prompt_template, 
                                      #this is for using tools
-                                     # tools=source_of_truth_tools_list,
+
+                                     tools=source_of_truth_tools_list,
                                      )
 
 ################ assistant agent 

@@ -3,16 +3,16 @@ from pydantic import AfterValidator, BaseModel, Field
 from typing_extensions import TypedDict
 from operator import add
 
-
-def validate_imperative_phrase(value: str) -> str:
-    if value.lower() not in {"imperative", "declarative", "other"}:
+def validate_phrase(value: str) -> str:
+    value = value.lower()
+    if  not value in {"preference", "declarative", "other"}:
         print("chat type validation error: ", value)
         return "other"
     return value
 
 
-class ImperativePhraseClassification(BaseModel):
-    phrase_type: Annotated[str,Field(description="Tipo de frase classificada."), AfterValidator(validate_imperative_phrase)]
+class PhraseClassification(BaseModel):
+    phrase_type: Annotated[str,Field(description="Tipo de frase classificada."), AfterValidator(validate_phrase)]
 
 
 

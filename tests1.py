@@ -14,34 +14,46 @@ def main():
     print("------------------------user------------------------")
 
     frases_imperativas = {
-        "Seja mais formal.":lambda x: x == "imperative",
-        "Responsa como um pirata.":lambda x: x == "imperative", #falhou
-        "Responsa formalmente.":lambda x: x == "imperative", #falhou
-        "Finja que é o eminem.":lambda x: x == "imperative",
-        "Feche a porta.":lambda x: x == "imperative",
-        "Lave as mãos.":lambda x: x == "imperative",
-        "Venha aqui.":lambda x: x == "imperative",
-        "Escute com atenção.":lambda x: x == "imperative",
-        "Compre frutas frescas.":lambda x: x == "imperative",
-        "Leia o livro até o final.":lambda x: x == "imperative",
-        "Ajude seus colegas.": lambda x: x == "imperative", #falhou
-        "Guarde seus pertences.":lambda x: x == "imperative",
-        "Vá direto ao ponto.":lambda x: x == "imperative", 
-        "Faça o seu melhor.":lambda x: x == "imperative", #falhou
+        "Fale mais rápido.": lambda x: x == "preference",
+        "Seja mais simples.": lambda x: x == "preference",
+        "Responda com uma frase.": lambda x: x == "preference",
+        "Use menos palavras.": lambda x: x == "preference",
+        "Evite detalhes.": lambda x: x == "preference",
+        "Seja mais curto.": lambda x: x == "preference",
+        "Não explique demais.": lambda x: x == "preference",
+        "Ignore as explicações.": lambda x: x == "preference",
+        "Responda com humor.": lambda x: x == "preference",
+        "Use um exemplo.": lambda x: x == "preference",
+        "Mude o tom.": lambda x: x == "preference",
+        "Seja mais direto.": lambda x: x == "preference",
+        "Fale como um especialista.": lambda x: x == "preference",
+        "Diga em uma palavra.": lambda x: x == "preference",
+        "Adicione um gráfico.": lambda x: x == "preference",
+        "Fale de forma leve.": lambda x: x == "preference",
+        "Foque no básico.": lambda x: x == "preference",
+        "Responda com clareza.": lambda x: x == "preference",
+        "Explique com analogias.": lambda x: x == "preference"
     }
+
+    test_size = len(frases_imperativas)
+    tests_passed = 0
+
     chat_uuid = uuid.uuid4()
     for k,v in frases_imperativas.items():
-        values = [v, "imperative"]
+        values = [v, "preference"]
         try: 
             config = {"configurable": {"thread_id": chat_uuid, "test": values, "enable_test": True}}
             app.invoke({"messages": [HumanMessage(content=k)]}, config)# pyright: ignore
             print("------- test passed -------")
+            tests_passed = tests_passed + 1
         except Exception as e:
             print("------- test failed -------")
             print("\terror: ", e)
-            print("\tvalues: ", [k, "imperative"])
+            print("\tvalues: ", [k, "preference"])
             pass
-        time.sleep(4)
+        time.sleep(10)
+
+    print(f"tests passed: {tests_passed} de {test_size}")
 
 if __name__ == "__main__":
     main()

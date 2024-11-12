@@ -7,8 +7,6 @@ from app.graph import chatbot_graph
 import streamlit as st
 import uuid
 
-if not os.environ.get("GROQ_API_KEY"):
-    raise Exception("GROQ_API_KEY não foi encontrada!")
 
 def main():
     st.title("chatbot")
@@ -56,9 +54,11 @@ def main():
             response = st.session_state.app.invoke({"messages": [user_prompt]}, st.session_state.config) # pyright: ignore
             message = response["messages"][-1]
             st.markdown(message.content)
+
+            # for m in response["messages"]:
+            #     print(m)
         #adiciona a mensagem do assistente ao historico da conversa 
         st.session_state.messages.append(message)
-
 
     # checkpointer = MemorySaver()
     # app = chatbot_graph(checkpointer=checkpointer)
@@ -66,8 +66,8 @@ def main():
     # config = {"configurable": {"thread_id": chat_uuid}}
     #
     # print("------------------------user------------------------")
-    # _input = "Cientistas confirmam presença de água em estado líquido na superfície de Marte."
-    # _input = "O brasil é um país da américa latina"
+    # _input = "Donald Trump foi eleitro presidente dos Estados Unidos em 2024."
+    # # _input = "responda como um pirata."
     # response = app.invoke({"messages": [HumanMessage(content=_input)]}, config)# pyright: ignore
     # print("------------------------messages------------------------")
     # for m in response["messages"]:
