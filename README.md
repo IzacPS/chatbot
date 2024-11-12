@@ -22,8 +22,8 @@ da interação entre os agentes.
 
 <img src="./images/graph.png" alt="drawing" width="500"/>
  
- - Na imagem os agentes são os nós [**tipo frase**], [**source of truth**] e [**bot response**]. O nó [**truth_tools**] possui as ferramentas.
- [**salva pref**] e [**salva verdade**] são responsáveis por salva a preferencia ou comando e a afirmação verdadeira do usuário. 
+ - Na imagem os agentes são os nós [**tipo frase**], [**fonte de verdade**] e [**bot**]. O nó [**ferramentas**] possui as ferramentas de busca.
+ [**salva comando**] e [**salva verdade**] são responsáveis por salva a preferencia ou comando e a afirmação verdadeira do usuário. 
 
 ## Instalação 
 ### 1. Docker:
