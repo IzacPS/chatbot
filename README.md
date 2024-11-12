@@ -85,7 +85,7 @@ docker compose up --build
 
 Agora você pode acessar o chat em `http://localhost:8501`.
 
-<img src="./images/chat.png" alt="drawing" width="500"/>
+<img src="./images/chat.png" alt="drawing" width="600"/>
 
 ## Configurações adicionais (Opcional)
 
