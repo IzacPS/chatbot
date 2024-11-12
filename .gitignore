@@ -1,4 +1,6 @@
 stuff.txt
+docker-compose-test.yml
+docker/Dockerfile-test
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

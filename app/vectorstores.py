@@ -3,6 +3,7 @@ import os
 
 from .embeddings import embeddings_model
 
+# connection = f"postgresql+psycopg://chatbot:1234567890@localhost:5432/chatbot_db"
 connection = f"postgresql+psycopg://{os.environ["POSTGRES_USER"]}:{os.environ["POSTGRES_PASSWORD"]}@{os.environ["POSTGRES_HOST"]}:{os.environ["POSTGRES_PORT"]}/{os.environ["POSTGRES_DB"]}"
 
 truth_vector_store = PGVector(
